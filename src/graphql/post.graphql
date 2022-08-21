@@ -1,0 +1,13 @@
+type Post {
+  userId: ID!
+  id: ID!
+  title: String!
+  body: String!
+  author: User!
+}
+
+input PostInput {
+  userId: ID!
+  title: String!
+  body: String!
+}

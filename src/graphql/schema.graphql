@@ -1,4 +1,13 @@
 type Query {
-  people: [Person]!
-  person(id: Int!): Person
+  users: [User!]!
+  user(id: ID!): User
+  posts: [Post!]!
+  post(id: ID!): Post
+}
+
+type Mutation {
+  addUser(user: UserInput!): User!
+  removeUser(id: ID!): Boolean!
+  addPost(post: PostInput!): Post!
+  removePost(id: ID!): Boolean!
 }
