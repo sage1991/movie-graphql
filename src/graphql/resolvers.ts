@@ -3,8 +3,9 @@ import { printSchema } from "graphql"
 import { loadSchemaSync } from "@graphql-tools/load"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
 import { makeExecutableSchema } from "@graphql-tools/schema"
+import axios from "axios"
 
-import { Post, User } from "./types"
+import { Movie, Post, User } from "./types"
 import { posts, users } from "./__mock__"
 
 const resolvers = {
@@ -14,7 +15,13 @@ const resolvers = {
       users.find(({ id }) => args.id === id),
     posts: (): Post[] => posts,
     post: (_: any, args: Pick<Post, "id">): Post | undefined =>
-      posts.find(({ id }) => id === args.id)
+      posts.find(({ id }) => id === args.id),
+    movies: async (): Promise<Movie[]> => {
+      const { data } = await axios.request<{ data: { movies: Movie[] } }>({
+        url: "https://yts.mx/api/v2/list_movies.json"
+      })
+      return data.data.movies
+    }
   },
   Mutation: {
     addUser: (_: any, person: Omit<User, "id">): User => {
