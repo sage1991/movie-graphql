@@ -1,6 +1,6 @@
-import { createServer } from "@graphql-yoga/node"
+import { ApolloServer } from "apollo-server"
 
 import { schema } from "./graphql"
 
-const server = createServer({ schema })
-void server.start().then(() => console.log("Graphql server now running"))
+const server = new ApolloServer({ schema })
+void server.listen().then(({ url }) => console.log(`Graphql server now running on ${url}`))
