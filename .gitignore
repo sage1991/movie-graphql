@@ -1,0 +1,14 @@
+# build
+dist
+build
+
+# macOS
+.DS_Store
+
+# intellij
+.idea
+
+# node.js
+node_modules
+npm-debug.log
+yarn-error.log
